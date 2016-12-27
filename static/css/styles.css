@@ -1,0 +1,83 @@
+/* Votre Style */
+
+* {
+    box-sizing: border-box; /* pour maîtriser width et flex-basis */
+}
+
+html {
+    display: flex; flex-direction: column; /* correction bug IE de min-height non appliqué à body */
+}
+
+body {
+    display: flex; /* crée un contexte flex pour ses enfants */
+    flex-direction: column; /* affichage vertical */
+    min-height: 100vh; /* toute la hauteur du viewport */
+    padding: 1em;
+}
+
+.wrapper {
+    flex: 1 1 auto; /* occupe la hauteur restante */
+    display: flex; /* crée un contexte flex pour ses enfants */
+}
+
+nav {
+    width: 12em;
+    order: -1; /* nav s'affiche en premier */
+}
+
+article {
+    flex: 1; /* occupe la largeur restante */
+}
+
+/* Decoration */
+body {
+    margin: 0;
+    background:black;
+    font-family: arial, sans-serif;
+
+}
+header,
+nav,
+article,
+footer {
+    margin: .05em;
+    padding: 1em;
+    border-radius: 6px;
+    background-color: lightslategray;
+    /*background-color: white;*/
+    color: black
+}
+
+header {
+    font-size: 50%;
+    text-align: center;
+}
+
+nav {
+    font-size: 100%;
+}
+
+article {
+}
+
+footer {
+}
+.cy {
+    width: 98%;
+    height: 96%;
+}
+.menuList:hover {
+    cursor: pointer;
+    background-color: lawngreen;
+}
+.menuList {
+    background-color:black;
+    background:lightslategray;
+    display:block;
+    margin:0;
+    padding: .5em;
+    border-style:ridge;
+    border-width:1px;
+    border-color:white;
+    text-align: center;
+}

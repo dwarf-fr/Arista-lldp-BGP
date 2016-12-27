@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+		<title>Arista map lldp</title>
+		<meta name="Arista map lldp" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../static/css/styles.css" media="all">
+		<link rel="stylesheet" href="../static/css/jquery-ui.css">
+
+		<script src="../static/js/jquery.js"></script>
+		<script src="../static/js/jquery-ui.js"></script>
+        <!--<script src="../static/js/cytoscape.min.js"></script>-->
+		<script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
+		<style type="text/css">
+			#accordeon li, #accordeon ul{display: block;}
+		</style>
+    </head>
+    <body>
+		<header><h1>MAP based on LLDP informations</h1></header>
+		<div class="wrapper">
+			<article>
+				<div class="cy" id="cy"></div>
+			</article>
+			<nav class="navigation">
+				<div id="accordion">
+					<h3>Map screen</h3>
+					<div>
+						<p id="LLDPrequest" class="menuList">Map LLDP</p>
+						<p id="SubmitManagement" class="menuList">Del Mgnt Link</p>
+					</div>
+					<h3>BGP</h3>
+					<div>
+						<p id="SubmitBGPAS" class="menuList">BGP AS</p>
+						<p id="SubmitBGPState" class="menuList">BGP State</p>
+					</div>
+					<h3>Config</h3>
+					<div>
+						<p id="SavePosition" class="menuList">Save Position</p>
+						<p id="PositionBack" class="menuList">Restore Posi</p>
+					</div>
+				</div>
+			</nav>
+		</div> <!-- /wrapper -->
+		<footer>
+			<p> Arista Networks </p>
+		</footer>
+		<script>
+			var cy = cytoscape({
+				container: document.getElementById('cy'),
+				style: [
+                {
+                    selector: 'node',
+                    style: {
+                        shape: 'circle',
+                        'background-color': 'black'            
+                    }
+                },
+				{
+					selector:'edge',
+					style: {
+						'line-color': 'orange',
+						'curve-style': 'bezier',
+					}
+				},
+				{
+					selector: '.autorotate',
+					style: {
+						'edge-text-rotation': 'autorotate',
+						'source-text-offset':45,
+						'target-text-offset':50
+					}
+				},
+				{
+                    selector: '.asNotOK',
+                    style: {
+                        'background-color': 'red',
+                    }
+                },
+				{
+                    selector: '.asReset',
+                    style: {
+                        'background-color': 'black',
+                    }
+                },
+				{
+                    selector: '.bgpstateok',
+                    style: {
+                        'line-color': 'green'
+                    }
+
+                },
+                {
+                    selector: '.bgpstatenook',
+                    style: {
+                        'line-color': 'red'
+                    }
+                }
+				]
+			});
+        </script>
+		<script src="static/js/script.js"> </script>
+    </body>
+
+</html>
