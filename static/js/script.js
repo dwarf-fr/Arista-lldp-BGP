@@ -118,6 +118,25 @@ $(function() {
             });
         }
     });
+// Bouton VXLAN
+    $('#Vxlan').click(function(){
+        console.log('Traitement du VXLAN')
+        $.ajax({
+            url: '/vxlanState',
+            dataType: 'json',
+            type: 'POST',
+            success: function(response) {
+                console.log(JSON.stringify(response));
+                // updateGraphBGPState(response);
+            },
+            error: function(error) {
+                console.log(error);
+            },
+            data: {json_str:JSON.stringify(cytoscapeTableNode)}
+        });
+
+
+    })
 
     function RestorePosition(){
         console.log('Traitement du restore de la position des Nodes');
