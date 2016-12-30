@@ -114,6 +114,26 @@ def bgpPeerState():
             pass
     return json.dumps(data)
 
+@app.route('/vxlanState', methods=['POST'])
+def vxlanState():
+    jsonRequest = request.form['json_str']
+    jsonNode = json.loads(jsonRequest)
+    data=[]
+    command = 'show interfaces vxlan 1'
+    for item in jsonNode :
+        server = item['data']['id']
+        print server
+        result = requeteAPI(command,server)
+        try:
+            resultMapVlanVni = result[0]['interfaces']['Vxlan1']['vlanToVniMap']
+            for key, value in resultMapVlanVni.iteritems():
+                # print key, value['vni']
+                data.append({'id':server,'vlan':key,'vni':value['vni']})  
+        except KeyError:
+            pass
+        except:
+            pass
+    return json.dumps(data)
 
 if __name__ == "__main__":
     app.run(debug=True,host ='0.0.0.0', port=3000)

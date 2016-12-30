@@ -63,7 +63,7 @@ article {
 footer {
 }
 .cy {
-    width: 98%;
+    width: 96%;
     height: 96%;
 }
 .menuList:hover {
@@ -79,5 +79,8 @@ footer {
     border-style:ridge;
     border-width:1px;
     border-color:white;
+    text-align: center;
+}
+.buttonStyle{
     text-align: center;
 }

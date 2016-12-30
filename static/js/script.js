@@ -119,7 +119,7 @@ $(function() {
         }
     });
 // Bouton VXLAN
-    $('#Vxlan').click(function(){
+    $('#SummitVxlanNumber').click(function(){
         console.log('Traitement du VXLAN')
         $.ajax({
             url: '/vxlanState',
@@ -127,16 +127,27 @@ $(function() {
             type: 'POST',
             success: function(response) {
                 console.log(JSON.stringify(response));
-                // updateGraphBGPState(response);
+                MapVlanVni(response);
             },
             error: function(error) {
                 console.log(error);
             },
             data: {json_str:JSON.stringify(cytoscapeTableNode)}
         });
-
-
     })
+
+    function MapVlanVni(response){
+        console.log('Traitement Vlan Vni');
+        ResetMap()
+        vxlanId = parseInt(document.getElementById('vxlanNumber').value)
+        for (item in response){
+            // search vxlanId in response
+            if (response[item].vni === vxlanId){
+                cy.$('#' + response[item].id).classes('asOK');
+            }
+            // console.log(response[item].id + " " + response[item].vni);
+        }
+    }
 
     function RestorePosition(){
         console.log('Traitement du restore de la position des Nodes');
@@ -151,8 +162,20 @@ $(function() {
         }
     }
 
+    function ResetMap(){
+        console.log('Reset Map');
+        for (item in cytoscapeTableNode){
+            cy.$('#' + cytoscapeTableNode[item]['data']['id']).classes('.asReset');
+        }
+        for (item in cytoscapeTableEdge){
+            cy.$('#'+cytoscapeTableEdge[item].data.id).classes('.asReset')
+        }
+    }
+
+
     function updateGraphBGPState(response){
         console.log('Traitement BGP state');
+        ResetMap()
         for (item in response){
             // Traitement des peer Established
             if (response[item].peerstate === 'Established'){
@@ -189,6 +212,7 @@ $(function() {
 
     function updateGraphAS(response){
         console.log('Traitement BGP AS number sur MAP');
+        ResetMap()
         for (item in response) {
             // console.log(response[item].id)
             myClickedID = response[item].id
